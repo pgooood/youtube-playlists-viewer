@@ -7,7 +7,7 @@ namespace pgood\youtube;
  * @author Pavel Khoroshkov
  */
 class transport{
-	protected $apiKey,$cachePath,$caheTime = 43200,$noCache = false;
+	protected $apiKey,$cachePath,$cacheTime = 43200,$noCache = false,$cacheName;
 	function __construct($apiKey,$arParams = null){
 		$this->apiKey($apiKey);
 		if($arParams)
@@ -15,8 +15,13 @@ class transport{
 	}
 	function cacheTime($v = null){
 		if($v !== null)
-			$this->caheTime = intval($v);
-		return $this->caheTime;
+			$this->cacheTime = intval($v);
+		return $this->cacheTime;
+	}
+	function cacheName($v = null){
+		if($v !== null)
+			$this->cacheName = intval($v);
+		return $this->cacheName;
 	}
 	function cachePath($v = null){
 		if($v !== null)
@@ -38,6 +43,7 @@ class transport{
 			return [
 				'cache-path' => $this->cachePath()
 				,'cache-time' => $this->cacheTime()
+				,'cache-name' => $this->cacheName()
 				,'no-cache' => $this->noCache()
 			];
 		}elseif(is_array($arParams)){
@@ -45,6 +51,8 @@ class transport{
 				$this->cachePath($arParams['cache-path']);
 			if(isset($arParams['cache-time']))
 				$this->cacheTime($arParams['cache-time']);
+			if(isset($arParams['cache-name']))
+				$this->cacheName($arParams['cache-name']);
 			if(isset($arParams['no-cache']))
 				$this->noCache($arParams['no-cache']);
 		}
@@ -107,7 +115,7 @@ class transport{
 		return md5(implode('&',$arParams));
 	}
 	private function cacheXml(){
-		$path = 'youtube-cache.xml';
+		$path = ($this->cacheName() ? $this->cacheName() : 'youtube-cache').'.xml';
 		if($this->cachePath())
 			$path = $this->cachePath().(substr($this->cachePath(),-1) == '/' ? null : '/').$path;
 		$xml = new \pgood\xml\cached($path);
