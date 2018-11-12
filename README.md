@@ -49,6 +49,8 @@ if($arLists = $channel->playlists()){
  * Playlist videos
  */
 $listId = 'PLGfjhrxr3EEz3EeRucI_uV2U_YP08OfyR';
+//optionally you can set different name for the cache file
+$arParams['cache-name'] = 'list-'.$listId;
 $list =  new \pgood\youtube\playlist($listId,$apiKey,$arParams);
 if($arVideos = $list->videos()){
 	?><h2>Videos</h2><?
