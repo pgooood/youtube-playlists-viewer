@@ -1,6 +1,6 @@
 # Youtube playlists viewer
 
-Youtube playlists viewer might be useful if you want to show playlists and videos from any Youtube channel on your website
+Youtube playlists viewer might be useful to show playlists and videos from a Youtube channel on your PHP website
 
 [Demo](http://pgood.space/userfiles/file/youtube-playlists-viewer/)
 
