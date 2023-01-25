@@ -48,7 +48,8 @@ class xml{
 			return $this->de();
 	}
 	function load($src){
-		$this->dd = @\DOMDocument::load($src);
+		$this->dd = new \DOMDocument;
+		$this->dd->load($src);
 		if(!$this->dd) throw new \Exception('xml::load failed <pre>'.print_r($src,1).'</pre>');
 		$this->xpc = new \DOMXPath($this->dd);
 	}
