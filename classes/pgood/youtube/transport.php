@@ -64,7 +64,7 @@ class transport{
 		if($arParams['key'] = $this->apiKey()){
 			if(!$this->noCache && ($v = $this->getCache($name,$arParams)))
 				return json_decode($v);
-			if(($v = @file_get_contents('https://www.googleapis.com/youtube/v3/'.$name.'?'.http_build_query($arParams)))
+			if(($v = file_get_contents('https://www.googleapis.com/youtube/v3/'.$name.'?'.http_build_query($arParams)))
 				&& ($response = json_decode($v))
 			){
 				$this->cacheResult($name,$arParams,$v);
